@@ -155,6 +155,7 @@ func aptlyLockfileCreate(cmd *commander.Command, args []string) error {
 
 		for _, pkg := range installedPkgs {
 			delete(installPkgs, pkg["Package"])
+			delete(installPkgs, pkg["Package"]+":"+pkg["Architecture"])
 			pkg.WriteTo(bufWriter, deb.FILETYPE_LOCKFILE)
 			fmt.Fprintf(bufWriter, "\n")
 		}
